@@ -73,9 +73,11 @@ Dieses Repository enthält ein umsetzbares Domain-Fundament für Sprint 1/2:
 
 - `npm run check` führt den TypeScript-Check aus.
 - `npm run test` baut die Domain-Module und führt Node-basierte Unit-Tests aus.
+- `npm run start` baut das Projekt und startet eine lauffähige Demo-App im Terminal (inkl. End-to-End-Flow).
 
 ## Nächste Schritte
 
+- ✅ Laufbare Demo-App (`npm run start`) integriert, die den End-to-End-Flow mit In-Memory-Daten ausführt.
 - React-Native-Bootstrap (`react-native init`) integrieren.
 - Onboarding-Screens auf Basis der neuen Modelle implementieren.
 - Queue-Use-Case mit MediaStore-Scan und UI-Session verbinden.
