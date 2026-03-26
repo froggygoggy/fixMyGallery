@@ -3,11 +3,15 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 interface OnboardingScreenProps {
   availableFolders: Array<{ bucketId: string; name: string }>;
-  onComplete: (selectedFolderBucketIds: string[]) => void;
+  onComplete: (input: {
+    selectedFolderBucketIds: string[];
+    processType: 'day_month' | 'chronological_asc' | 'chronological_desc';
+  }) => void;
 }
 
 export function OnboardingScreen({ availableFolders, onComplete }: OnboardingScreenProps): React.JSX.Element {
   const [selected, setSelected] = useState<string[]>([]);
+  const [processType, setProcessType] = useState<'day_month' | 'chronological_asc' | 'chronological_desc'>('chronological_asc');
 
   const hasSelection = useMemo(() => selected.length > 0, [selected]);
 
@@ -35,10 +39,23 @@ export function OnboardingScreen({ availableFolders, onComplete }: OnboardingScr
         );
       })}
 
+      <Text style={styles.subtitle}>Aufräumprozess</Text>
+      <View style={styles.processRow}>
+        <Pressable style={[styles.processChip, processType === 'day_month' && styles.rowSelected]} onPress={() => setProcessType('day_month')}>
+          <Text>Nach Tag</Text>
+        </Pressable>
+        <Pressable style={[styles.processChip, processType === 'chronological_asc' && styles.rowSelected]} onPress={() => setProcessType('chronological_asc')}>
+          <Text>Chronologisch ↑</Text>
+        </Pressable>
+        <Pressable style={[styles.processChip, processType === 'chronological_desc' && styles.rowSelected]} onPress={() => setProcessType('chronological_desc')}>
+          <Text>Chronologisch ↓</Text>
+        </Pressable>
+      </View>
+
       <Pressable
         disabled={!hasSelection}
         style={[styles.primaryButton, !hasSelection && styles.primaryButtonDisabled]}
-        onPress={() => onComplete(selected)}>
+        onPress={() => onComplete({ selectedFolderBucketIds: selected, processType })}>
         <Text style={styles.primaryButtonText}>Onboarding abschließen</Text>
       </Pressable>
     </View>
@@ -56,6 +73,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
+  processRow: { flexDirection: 'row', gap: 8, flexWrap: 'wrap' },
+  processChip: { paddingVertical: 8, paddingHorizontal: 10, borderRadius: 8, backgroundColor: '#e2e8f0' },
   rowSelected: { backgroundColor: '#bfdbfe' },
   rowText: { fontSize: 16, color: '#0f172a' },
   primaryButton: { marginTop: 20, padding: 14, borderRadius: 10, alignItems: 'center', backgroundColor: '#1d4ed8' },

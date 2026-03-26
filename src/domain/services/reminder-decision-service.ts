@@ -5,6 +5,7 @@ export interface ReminderDecisionInput {
   openItemsCount: number;
   now: Date;
   alreadyNotifiedToday: boolean;
+  lastNotifiedAt?: Date;
 }
 
 export interface ReminderDecision {
@@ -14,8 +15,11 @@ export interface ReminderDecision {
     | 'no_open_tasks'
     | 'already_notified'
     | 'outside_time_window'
+    | 'outside_frequency_window'
     | 'notify';
 }
+
+const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
 
 export class ReminderDecisionService {
   shouldNotify(input: ReminderDecisionInput): ReminderDecision {
@@ -29,6 +33,10 @@ export class ReminderDecisionService {
 
     if (input.alreadyNotifiedToday) {
       return { shouldNotify: false, reason: 'already_notified' };
+    }
+
+    if (!this.matchesFrequency(input)) {
+      return { shouldNotify: false, reason: 'outside_frequency_window' };
     }
 
     const [hourString, minuteString] = input.settings.timeOfDay.split(':');
@@ -48,5 +56,25 @@ export class ReminderDecisionService {
     }
 
     return { shouldNotify: true, reason: 'notify' };
+  }
+
+  private matchesFrequency(input: ReminderDecisionInput): boolean {
+    const frequency = input.settings.frequency ?? 'daily';
+
+    if (frequency === 'weekly') {
+      const targetWeekday = input.settings.weekday ?? 1;
+
+      if (input.now.getDay() !== targetWeekday) {
+        return false;
+      }
+
+      if (!input.lastNotifiedAt) {
+        return true;
+      }
+
+      return input.now.getTime() - input.lastNotifiedAt.getTime() >= WEEK_MS;
+    }
+
+    return true;
   }
 }

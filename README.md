@@ -68,6 +68,9 @@ Dieses Repository enthält ein umsetzbares Domain-Fundament für Sprint 1/2:
 
 - ✅ Papierkorb-Retention-Use-Case für automatisches Ausmisten alter Einträge
 - ✅ Session-Command-Log (persistiert im AppState) + Replay-Use-Case für Recovery/Debugging
+- ✅ Neuer Queue-Sortiermodus `day_month` (gleicher Tag/Monat jahrübergreifend) sowie chronologisch auf-/absteigend konfigurierbar
+- ✅ Vorschlag für Review-Fototag: `fmg.cleaned.v1` (in `ReviewState.reviewTag`)
+- ✅ Folder-Retention-Tasks pro Ordner (z. B. WhatsApp älter als 365 Tage) als Grundlage für Aufgaben/Push-Trigger
 
 ## Entwicklung
 
@@ -77,7 +80,6 @@ Dieses Repository enthält ein umsetzbares Domain-Fundament für Sprint 1/2:
 - `npm run mobile:install` installiert die React-Native-Abhängigkeiten im Unterordner `react-native`.
 - `npm run mobile:start` startet den Metro-Bundler für die Mobile-App.
 - `npm run mobile:android` baut/öffnet die Android-App (lokales Android-SDK erforderlich).
-- Für Android-Builds mit React Native `0.76.6` sollte ein JDK `17` verwendet werden; mit Java `25` schlägt Gradle im lokalen Setup fehl.
 
 ## Nächste Schritte
 
@@ -86,3 +88,13 @@ Dieses Repository enthält ein umsetzbares Domain-Fundament für Sprint 1/2:
 - ✅ Onboarding-Screen auf Basis der Domain-Modelle implementiert (`OnboardingScreen`).
 - ✅ Queue-Use-Case mit MediaStore-Scan und UI-Session verbunden (`BootstrapUiSessionUseCase`).
 - ✅ Sortier-UI (Grid + Einzelbild) inkl. Aktionen (move/copy/delete) als erster funktionsfähiger Screen umgesetzt (`SortingSessionScreen`).
+
+
+## Kurzanleitung
+
+1. Ordner im Onboarding auswählen und Aufräumprozess festlegen (`day_month`, `chronological_asc`, `chronological_desc`).
+2. Für alte und neue Fotos getrennte Ziele setzen (Zeit oder Anzahl je Tag/Woche).
+3. Reminder konfigurieren (Uhrzeit, täglich oder wöchentlich inkl. Wochentag).
+4. In der Session Bilder im Grid auswählen oder per Swipe im Einzelbild sortieren (move/copy/delete).
+5. Bei erreichter Quote: Loben, optional Session verlängern oder bis zur nächsten Periode pausieren.
+6. Papierkorb und Undo nutzen, um Fehlaktionen rückgängig zu machen.

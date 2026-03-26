@@ -19,8 +19,11 @@ export default function App(): React.JSX.Element {
     [],
   );
 
-  async function handleOnboardingComplete(selectedFolderBucketIds: string[]): Promise<void> {
-    const bootstrap = await bootstrapOnboardingAndSession(selectedFolderBucketIds);
+  async function handleOnboardingComplete(input: {
+    selectedFolderBucketIds: string[];
+    processType: 'day_month' | 'chronological_asc' | 'chronological_desc';
+  }): Promise<void> {
+    const bootstrap = await bootstrapOnboardingAndSession(input.selectedFolderBucketIds, input.processType);
     setQueueMediaIds(bootstrap.queueMediaIds);
     setStatus(`Session gestartet: ${bootstrap.queueMediaIds.length} Elemente in der Queue.`);
     setStep('sorting');

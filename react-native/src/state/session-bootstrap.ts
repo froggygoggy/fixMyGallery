@@ -28,7 +28,10 @@ class DemoMediaStoreBridge {
   }
 }
 
-export async function bootstrapOnboardingAndSession(selectedFolderBucketIds: string[]): Promise<{
+export async function bootstrapOnboardingAndSession(
+  selectedFolderBucketIds: string[],
+  ordering: 'day_month' | 'chronological_asc' | 'chronological_desc',
+): Promise<{
   queueMediaIds: string[];
   initialState: SessionState;
 }> {
@@ -54,6 +57,7 @@ export async function bootstrapOnboardingAndSession(selectedFolderBucketIds: str
     mode: 'old',
     nowMs: Date.now(),
     newWindowDays: 30,
+    ordering,
   });
 
   const stateMachine = new SessionStateMachineService();

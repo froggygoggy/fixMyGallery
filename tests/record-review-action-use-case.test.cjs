@@ -21,4 +21,5 @@ test('RecordReviewActionUseCase writes moved review states for multiple media id
   const stored = await repo.getReviewStates();
   assert.equal(stored.length, 2);
   assert.equal(stored[1].targetFolderId, 'family');
+  assert.equal(stored[0].reviewTag, 'fmg.cleaned.v1');
 });

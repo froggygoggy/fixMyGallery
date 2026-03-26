@@ -1,4 +1,5 @@
 import { SessionQueueItem } from '../models/session-queue-item';
+import { SessionQueueOrdering } from '../models/session-queue-ordering';
 import { AppStateRepository } from '../repositories/app-state-repository';
 import { MutableCleanupRepository } from '../repositories/mutable-cleanup-repository';
 import { MediaScannerService } from '../services/media-scanner-service';
@@ -9,6 +10,7 @@ export interface BootstrapUiSessionInput {
   mode: 'old' | 'new';
   nowMs: number;
   newWindowDays: number;
+  ordering?: SessionQueueOrdering;
 }
 
 export interface BootstrapUiSessionResult {
@@ -39,6 +41,7 @@ export class BootstrapUiSessionUseCase {
       folderUsage,
       nowMs: input.nowMs,
       newWindowDays: input.newWindowDays,
+      ordering: input.ordering,
     });
 
     return {

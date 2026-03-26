@@ -12,6 +12,7 @@ export function SortingSessionScreen({ queueMediaIds, onMove, onCopy, onDelete }
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
   const visibleIds = useMemo(() => queueMediaIds.slice(0, 12), [queueMediaIds]);
+  const smartFolders = useMemo(() => ['Zuletzt: Family', 'Häufig: Receipts', '+ Neuer Ordner'], []);
 
   function toggleSelection(mediaId: string): void {
     setSelectedIds((prev) => (prev.includes(mediaId) ? prev.filter((id) => id !== mediaId) : [...prev, mediaId]));
@@ -21,6 +22,15 @@ export function SortingSessionScreen({ queueMediaIds, onMove, onCopy, onDelete }
     <View style={styles.container}>
       <Text style={styles.title}>Sortier-Session</Text>
       <Text style={styles.subtitle}>Grid + Einzelbild Auswahl, danach move/copy/delete ausführen.</Text>
+      <Text style={styles.hint}>Standard: Swipe links = Löschen, Swipe rechts = Ordnerwahl.</Text>
+
+      <View style={styles.folderRow}>
+        {smartFolders.map((folder) => (
+          <Pressable key={folder} style={styles.folderChip}>
+            <Text>{folder}</Text>
+          </Pressable>
+        ))}
+      </View>
 
       <View style={styles.grid}>
         {visibleIds.map((mediaId) => {
@@ -54,7 +64,10 @@ export function SortingSessionScreen({ queueMediaIds, onMove, onCopy, onDelete }
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 24, backgroundColor: '#ffffff' },
   title: { fontSize: 24, fontWeight: '700' },
-  subtitle: { fontSize: 14, color: '#475569', marginBottom: 10 },
+  subtitle: { fontSize: 14, color: '#475569', marginBottom: 4 },
+  hint: { fontSize: 12, color: '#64748b', marginBottom: 8 },
+  folderRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginBottom: 10 },
+  folderChip: { backgroundColor: '#e2e8f0', borderRadius: 8, paddingVertical: 6, paddingHorizontal: 8 },
   grid: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginBottom: 20 },
   tile: { width: '31%', aspectRatio: 1, borderRadius: 8, backgroundColor: '#e2e8f0', alignItems: 'center', justifyContent: 'center' },
   tileSelected: { backgroundColor: '#c7d2fe' },
