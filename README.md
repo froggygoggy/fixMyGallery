@@ -37,6 +37,15 @@ Dieses Repository enthält ein umsetzbares Domain-Fundament für Sprint 1/2:
 - ✅ In-Memory-Persistenz für App-State, Undo-History und Trash
 - ✅ Integrativer Sprint-2-Flow-Use-Case (Onboarding -> Dashboard -> Session-Step)
 
+
+## Sprint-3 Status (in Arbeit)
+
+- ✅ Grid-Selection-Service für Multi-Select-Flows
+- ✅ Swipe-Intent-Service für konfigurierbare Löschrichtung
+- ✅ Use Case für Sortier-Präferenzen (View-Mode, Grid-Größe, Swipe-Richtung)
+- ✅ Bulk-Action-Preview-Use-Case inkl. Bestätigungslogik bei großen Löschaktionen
+- ✅ Sorting-Session-Presenter für screen-nahe Sortieransicht
+
 ## Entwicklung
 
 - `npm run check` führt den TypeScript-Check aus.
