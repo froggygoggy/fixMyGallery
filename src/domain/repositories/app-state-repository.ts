@@ -16,6 +16,7 @@ export interface AppStateRepository {
 
   appendTrashEntries(entries: TrashEntry[]): Promise<void>;
   loadTrashEntries(): Promise<TrashEntry[]>;
+  removeTrashEntries(mediaStoreIds: string[]): Promise<number>;
 
   appendUndoHistoryEntry(entry: UndoHistoryEntry): Promise<void>;
   loadUndoHistory(): Promise<UndoHistoryEntry[]>;

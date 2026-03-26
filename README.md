@@ -46,6 +46,12 @@ Dieses Repository enthält ein umsetzbares Domain-Fundament für Sprint 1/2:
 - ✅ Bulk-Action-Preview-Use-Case inkl. Bestätigungslogik bei großen Löschaktionen
 - ✅ Sorting-Session-Presenter für screen-nahe Sortieransicht
 
+- ✅ Pinned-Slot-Konfiguration validieren und persistieren
+
+- ✅ Restore-Flow aus Papierkorb inkl. Undo-History-Eintrag
+
+- ✅ Zeitbasierten Session-Fortschritt als Use Case (Minuten-Gutschrift)
+
 ## Entwicklung
 
 - `npm run check` führt den TypeScript-Check aus.

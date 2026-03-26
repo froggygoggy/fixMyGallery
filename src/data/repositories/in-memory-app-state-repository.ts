@@ -44,6 +44,13 @@ export class InMemoryAppStateRepository implements AppStateRepository {
     return [...this.trashEntries];
   }
 
+  async removeTrashEntries(mediaStoreIds: string[]): Promise<number> {
+    const before = this.trashEntries.length;
+    const removeSet = new Set(mediaStoreIds);
+    this.trashEntries = this.trashEntries.filter((entry) => !removeSet.has(entry.mediaStoreId));
+    return before - this.trashEntries.length;
+  }
+
   async appendUndoHistoryEntry(entry: UndoHistoryEntry): Promise<void> {
     this.undoHistory.push(entry);
   }
