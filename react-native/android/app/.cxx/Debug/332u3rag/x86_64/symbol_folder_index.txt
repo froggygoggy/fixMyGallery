@@ -1,0 +1,1 @@
+D:\Gustav\Programmieren\fixMyGallery\react-native\android\app\build\intermediates\cxx\Debug\332u3rag\obj\x86_64
