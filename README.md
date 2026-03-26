@@ -77,6 +77,7 @@ Dieses Repository enthält ein umsetzbares Domain-Fundament für Sprint 1/2:
 - `npm run mobile:install` installiert die React-Native-Abhängigkeiten im Unterordner `react-native`.
 - `npm run mobile:start` startet den Metro-Bundler für die Mobile-App.
 - `npm run mobile:android` baut/öffnet die Android-App (lokales Android-SDK erforderlich).
+- Für Android-Builds mit React Native `0.76.6` sollte ein JDK `17` verwendet werden; mit Java `25` schlägt Gradle im lokalen Setup fehl.
 
 ## Nächste Schritte
 

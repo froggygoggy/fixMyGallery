@@ -1,0 +1,9 @@
+# ninja log v5
+2	31	0	D:/Gustav/Programmieren/fixMyGallery/react-native/android/app/.cxx/Debug/332u3rag/arm64-v8a/CMakeFiles/cmake.verify_globs	9a8d6851f34b1cb
+0	3756	7962210762574793	CMakeFiles/appmodules.dir/D_/Gustav/Programmieren/fixMyGallery/react-native/android/app/build/generated/autolinking/src/main/jni/autolinking.cpp.o	9db91a8d0d98c041
+4	4273	7962210767740004	CMakeFiles/appmodules.dir/OnLoad.cpp.o	771657e652093085
+4273	4371	7962210768755783	D:/Gustav/Programmieren/fixMyGallery/react-native/android/app/build/intermediates/cxx/Debug/332u3rag/obj/arm64-v8a/libappmodules.so	b53a8f170e1f4784
+1	23	0	D:/Gustav/Programmieren/fixMyGallery/react-native/android/app/.cxx/Debug/332u3rag/arm64-v8a/CMakeFiles/cmake.verify_globs	9a8d6851f34b1cb
+1	21	0	D:/Gustav/Programmieren/fixMyGallery/react-native/android/app/.cxx/Debug/332u3rag/arm64-v8a/CMakeFiles/cmake.verify_globs	9a8d6851f34b1cb
+1	20	0	D:/Gustav/Programmieren/fixMyGallery/react-native/android/app/.cxx/Debug/332u3rag/arm64-v8a/CMakeFiles/cmake.verify_globs	9a8d6851f34b1cb
+2	22	0	D:/Gustav/Programmieren/fixMyGallery/react-native/android/app/.cxx/Debug/332u3rag/arm64-v8a/CMakeFiles/cmake.verify_globs	9a8d6851f34b1cb

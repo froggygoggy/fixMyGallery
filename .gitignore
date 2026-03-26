@@ -1,2 +1,8 @@
 node_modules/
 dist/
+react-native-scaffold/
+react-native/tmp/
+react-native/android/.gradle/
+react-native/android/build/
+react-native/android/app/build/
+react-native/android/local.properties
