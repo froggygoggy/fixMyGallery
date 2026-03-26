@@ -1,0 +1,14 @@
+{
+  "name": "fix-my-gallery",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Sprint-1 Grundgerüst für Fix my Gallery.",
+  "scripts": {
+    "check": "tsc --noEmit",
+    "build": "tsc -p tsconfig.build.json",
+    "test": "npm run build && node --test tests/**/*.test.cjs"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}
