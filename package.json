@@ -7,7 +7,10 @@
     "check": "tsc --noEmit",
     "build": "tsc -p tsconfig.build.json",
     "test": "npm run build && node --test tests/**/*.test.cjs",
-    "start": "npm run build && node dist/app/demo-app.js"
+    "start": "npm run build && node dist/app/demo-app.js",
+    "mobile:install": "npm --prefix react-native install",
+    "mobile:start": "npm --prefix react-native run start",
+    "mobile:android": "npm --prefix react-native run android"
   },
   "devDependencies": {
     "typescript": "^5.9.3"
