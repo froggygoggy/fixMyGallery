@@ -15,6 +15,7 @@ Dieses Repository enthält ein umsetzbares Domain-Fundament für Sprint 1/2:
 - Empfehlungservice für intelligente Ordnerpriorisierung (zuletzt/häufig verwendet).
 - Pinned-Slot-Service + Sort-Action-Planer für schnelle Swipe-Zielauflösung und Aktionsentscheidung am Bildschirmrand.
 - Session-State-Machine für Start/Selektion/Action-Apply/Pause/Resume/Goal-Reached/Complete.
+- Trash- und Undo-Planung (Delete -> Papierkorb-Einträge, Undo-Operationen) für sichere Sortieraktionen.
 - In-Memory-Repository für schnelle Entwicklung und Tests von Domainlogik.
 - SQLite-Migrationen für Kern-Tabellen plus Onboarding-/Reminder-/Fenster-Einstellungen sowie pinned slots/folder usage.
 - Android-Permission- und MediaStore-Service-Grundgerüste.
