@@ -37,6 +37,20 @@ export class OnboardingValidatorService {
       errors.push('Reminder time must be in HH:mm format.');
     }
 
+
+    const reminderFrequency = input.reminderSettings.frequency ?? 'daily';
+
+    if (reminderFrequency !== 'daily' && reminderFrequency !== 'weekly') {
+      errors.push('Reminder frequency must be daily or weekly.');
+    }
+
+    if (reminderFrequency === 'weekly') {
+      const weekday = input.reminderSettings.weekday;
+      if (weekday === undefined || weekday < 0 || weekday > 6) {
+        errors.push('Weekly reminder weekday must be between 0 and 6.');
+      }
+    }
+
     if (input.newPhotosSettings.windowDays <= 0) {
       errors.push('New photos window days must be greater than zero.');
     }

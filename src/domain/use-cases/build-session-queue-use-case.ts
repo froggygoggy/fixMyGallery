@@ -1,6 +1,7 @@
 import { CleanupRepository } from '../repositories/cleanup-repository';
 import { CleanupQueueEngine } from '../services/cleanup-queue-engine';
 import { SessionQueueItem } from '../models/session-queue-item';
+import { SessionQueueOrdering } from '../models/session-queue-ordering';
 import { CleanupMode } from '../types/cleanup';
 
 export interface BuildSessionQueueInput {
@@ -8,6 +9,7 @@ export interface BuildSessionQueueInput {
   selectedFolderBucketIds: string[];
   newWindowDays?: number;
   nowMs?: number;
+  ordering?: SessionQueueOrdering;
 }
 
 export class BuildSessionQueueUseCase {
@@ -30,6 +32,7 @@ export class BuildSessionQueueUseCase {
       reviewStatusByMediaId,
       newWindowDays: input.newWindowDays,
       nowMs: input.nowMs,
+      ordering: input.ordering,
     });
   }
 }

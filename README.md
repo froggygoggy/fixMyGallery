@@ -68,15 +68,33 @@ Dieses Repository enthält ein umsetzbares Domain-Fundament für Sprint 1/2:
 
 - ✅ Papierkorb-Retention-Use-Case für automatisches Ausmisten alter Einträge
 - ✅ Session-Command-Log (persistiert im AppState) + Replay-Use-Case für Recovery/Debugging
+- ✅ Neuer Queue-Sortiermodus `day_month` (gleicher Tag/Monat jahrübergreifend) sowie chronologisch auf-/absteigend konfigurierbar
+- ✅ Vorschlag für Review-Fototag: `fmg.cleaned.v1` (in `ReviewState.reviewTag`)
+- ✅ Folder-Retention-Tasks pro Ordner (z. B. WhatsApp älter als 365 Tage) als Grundlage für Aufgaben/Push-Trigger
 
 ## Entwicklung
 
 - `npm run check` führt den TypeScript-Check aus.
 - `npm run test` baut die Domain-Module und führt Node-basierte Unit-Tests aus.
+- `npm run start` baut das Projekt und startet eine lauffähige Demo-App im Terminal (inkl. End-to-End-Flow).
+- `npm run mobile:install` installiert die React-Native-Abhängigkeiten im Unterordner `react-native`.
+- `npm run mobile:start` startet den Metro-Bundler für die Mobile-App.
+- `npm run mobile:android` baut/öffnet die Android-App (lokales Android-SDK erforderlich).
 
 ## Nächste Schritte
 
-- React-Native-Bootstrap (`react-native init`) integrieren.
-- Onboarding-Screens auf Basis der neuen Modelle implementieren.
-- Queue-Use-Case mit MediaStore-Scan und UI-Session verbinden.
-- Sortier-UI (Grid + Einzelbild) und Aktionen (move/copy/delete) implementieren.
+- ✅ Laufbare Demo-App (`npm run start`) integriert, die den End-to-End-Flow mit In-Memory-Daten ausführt.
+- ✅ React-Native-Bootstrap unter `react-native/` integriert (App, Metro/Babel, Android-Run-Skripte).
+- ✅ Onboarding-Screen auf Basis der Domain-Modelle implementiert (`OnboardingScreen`).
+- ✅ Queue-Use-Case mit MediaStore-Scan und UI-Session verbunden (`BootstrapUiSessionUseCase`).
+- ✅ Sortier-UI (Grid + Einzelbild) inkl. Aktionen (move/copy/delete) als erster funktionsfähiger Screen umgesetzt (`SortingSessionScreen`).
+
+
+## Kurzanleitung
+
+1. Ordner im Onboarding auswählen und Aufräumprozess festlegen (`day_month`, `chronological_asc`, `chronological_desc`).
+2. Für alte und neue Fotos getrennte Ziele setzen (Zeit oder Anzahl je Tag/Woche).
+3. Reminder konfigurieren (Uhrzeit, täglich oder wöchentlich inkl. Wochentag).
+4. In der Session Bilder im Grid auswählen oder per Swipe im Einzelbild sortieren (move/copy/delete).
+5. Bei erreichter Quote: Loben, optional Session verlängern oder bis zur nächsten Periode pausieren.
+6. Papierkorb und Undo nutzen, um Fehlaktionen rückgängig zu machen.

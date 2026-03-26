@@ -2,6 +2,7 @@ import { CleanupRepository } from '../repositories/cleanup-repository';
 import { BuildSessionQueueUseCase } from './build-session-queue-use-case';
 import { CleanupMode } from '../types/cleanup';
 import { SessionQueueItem } from '../models/session-queue-item';
+import { SessionQueueOrdering } from '../models/session-queue-ordering';
 import { FolderRecommendationService, FolderUsage } from '../services/folder-recommendation-service';
 
 export interface StartSessionInput {
@@ -11,6 +12,7 @@ export interface StartSessionInput {
   newWindowDays?: number;
   nowMs?: number;
   recommendationLimit?: number;
+  ordering?: SessionQueueOrdering;
 }
 
 export interface StartSessionResult {
@@ -35,6 +37,7 @@ export class StartSessionUseCase {
       selectedFolderBucketIds: input.selectedFolderBucketIds,
       newWindowDays: input.newWindowDays,
       nowMs: input.nowMs,
+      ordering: input.ordering,
     });
 
     const recommendedFolderBucketIds = this.folderRecommendationService.recommend({

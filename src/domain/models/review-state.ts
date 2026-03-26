@@ -6,4 +6,5 @@ export interface ReviewState {
   processedAt?: number;
   sourceFolderId?: string;
   targetFolderId?: string;
+  reviewTag?: string;
 }

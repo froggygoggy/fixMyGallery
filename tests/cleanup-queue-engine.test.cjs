@@ -36,3 +36,26 @@ test('CleanupQueueEngine filters pending and sorts old/new correctly', () => {
 
   assert.deepEqual(oldQueue.map((item) => item.mediaStoreId), ['2']);
 });
+
+
+test('CleanupQueueEngine supports day-month grouping independent from year', () => {
+  const engine = new CleanupQueueEngine();
+  const now = Date.UTC(2026, 2, 25);
+
+  const mediaItems = [
+    { mediaStoreId: 'a', uri: 'a', folderBucketId: 'cam', dateTaken: Date.UTC(2024, 0, 2), mimeType: 'image/jpeg', sizeBytes: 1 },
+    { mediaStoreId: 'b', uri: 'b', folderBucketId: 'cam', dateTaken: Date.UTC(2025, 0, 1), mimeType: 'image/jpeg', sizeBytes: 1 },
+    { mediaStoreId: 'c', uri: 'c', folderBucketId: 'cam', dateTaken: Date.UTC(2021, 11, 31), mimeType: 'image/jpeg', sizeBytes: 1 },
+  ];
+
+  const queue = engine.getQueue('old', {
+    mediaItems,
+    selectedFolderBucketIds: ['cam'],
+    reviewStatusByMediaId: {},
+    nowMs: now,
+    newWindowDays: 30,
+    ordering: 'day_month',
+  });
+
+  assert.deepEqual(queue.map((item) => item.mediaStoreId), ['b', 'a', 'c']);
+});
