@@ -67,4 +67,8 @@ test('ProcessSessionStepUseCase persists undo/trash and returns refreshed dashbo
   assert.equal(result.undoHistoryCount, 1);
   assert.equal(result.dashboard.openNewCount, 1);
   assert.equal(result.dashboard.openOldCount, 1);
+
+  const commandLogs = await appRepo.loadSessionCommandLogs();
+  assert.equal(commandLogs.length, 1);
+  assert.equal(commandLogs[0].actionType, 'delete');
 });

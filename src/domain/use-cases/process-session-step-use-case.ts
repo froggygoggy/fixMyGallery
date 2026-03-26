@@ -6,6 +6,7 @@ import { CleanupRepository } from '../repositories/cleanup-repository';
 import { Point } from '../services/pinned-slot-service';
 import { BootstrapDashboardUseCase } from './bootstrap-dashboard-use-case';
 import { ExecuteSessionActionInput, ExecuteSessionActionUseCase } from './execute-session-action-use-case';
+import { LogSessionCommandUseCase } from './log-session-command-use-case';
 
 export interface ProcessSessionStepInput {
   sessionState: SessionState;
@@ -31,6 +32,7 @@ export interface ProcessSessionStepResult {
 export class ProcessSessionStepUseCase {
   private readonly executeSessionActionUseCase: ExecuteSessionActionUseCase;
   private readonly bootstrapDashboardUseCase: BootstrapDashboardUseCase;
+  private readonly logSessionCommandUseCase: LogSessionCommandUseCase;
 
   constructor(
     private readonly cleanupRepository: CleanupRepository,
@@ -38,6 +40,7 @@ export class ProcessSessionStepUseCase {
   ) {
     this.executeSessionActionUseCase = new ExecuteSessionActionUseCase();
     this.bootstrapDashboardUseCase = new BootstrapDashboardUseCase(cleanupRepository, appStateRepository);
+    this.logSessionCommandUseCase = new LogSessionCommandUseCase(appStateRepository);
   }
 
   async execute(input: ProcessSessionStepInput): Promise<ProcessSessionStepResult> {
@@ -60,6 +63,15 @@ export class ProcessSessionStepUseCase {
       mediaStoreIds: actionResult.undo.mediaStoreIds,
       sourceFolderBucketId: actionResult.undo.sourceFolderBucketId,
       createdAt: input.now.getTime(),
+    });
+    await this.logSessionCommandUseCase.execute({
+      previousState: input.sessionState,
+      nextState: actionResult.nextState,
+      actionType: actionResult.actionType,
+      selectedMediaIds: input.selectedMediaIds,
+      timestampMs: input.now.getTime(),
+      processedCountDelta: input.selectedMediaIds.length,
+      processedMinutesDelta: 0,
     });
 
     const [dashboard, trashEntries, undoHistory] = await Promise.all([

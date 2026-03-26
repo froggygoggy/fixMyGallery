@@ -1,5 +1,7 @@
+import { CreatedAlbum } from '../models/created-album';
 import { OnboardingConfig } from '../models/onboarding-config';
 import { PinnedSlot } from '../models/pinned-slot';
+import { SessionCommandLogEntry } from '../models/session-command-log-entry';
 import { TrashEntry } from '../models/trash-entry';
 import { UndoHistoryEntry } from '../models/undo-history-entry';
 import { FolderUsage } from '../services/folder-recommendation-service';
@@ -20,4 +22,11 @@ export interface AppStateRepository {
 
   appendUndoHistoryEntry(entry: UndoHistoryEntry): Promise<void>;
   loadUndoHistory(): Promise<UndoHistoryEntry[]>;
+  popLastUndoHistoryEntry(): Promise<UndoHistoryEntry | null>;
+
+  appendSessionCommandLog(entry: SessionCommandLogEntry): Promise<void>;
+  loadSessionCommandLogs(): Promise<SessionCommandLogEntry[]>;
+
+  saveCreatedAlbums(albums: CreatedAlbum[]): Promise<void>;
+  loadCreatedAlbums(): Promise<CreatedAlbum[]>;
 }

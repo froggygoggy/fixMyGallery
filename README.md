@@ -24,8 +24,10 @@ Dieses Repository enthält ein umsetzbares Domain-Fundament für Sprint 1/2:
 - UI-Adapter-Controller (Onboarding/Dashboard/Session) als Brücke zwischen React-Native-Screens und Domain-Use-Cases.
 - Presenter-Layer mit Fehler-Mapping und deutschen UI-Strings (i18n-ready) für screen-nahe Zustände.
 - In-Memory-Repository für schnelle Entwicklung und Tests von Domainlogik.
+- Persistentes AppState-Repository über austauschbaren Key-Value-Store (für spätere SQLite/MMKV/AsyncStorage-Anbindung).
+- Persistentes Cleanup-Repository (Folders/Media/ReviewStates) über austauschbaren Key-Value-Store plus Use Case zum Schreiben von Review-Aktionen.
 - SQLite-Migrationen für Kern-Tabellen plus Onboarding-/Reminder-/Fenster-Einstellungen sowie pinned slots/folder usage.
-- Android-Permission- und MediaStore-Service-Grundgerüste.
+- Android-Permission-Service mit API-Level-spezifischer Berechtigungslogik und MediaStore-Scanner mit Bridge-basiertem Mapping/Filtering.
 
 
 ## Sprint-2 Status
@@ -51,6 +53,21 @@ Dieses Repository enthält ein umsetzbares Domain-Fundament für Sprint 1/2:
 - ✅ Restore-Flow aus Papierkorb inkl. Undo-History-Eintrag
 
 - ✅ Zeitbasierten Session-Fortschritt als Use Case (Minuten-Gutschrift)
+
+- ✅ Smart-Slot-Vorschläge aus Ordnernutzung (Quick-Action-Suggestions)
+- ✅ Slot-Priorisierung verbessert: recents/frequents kombiniert, bereits gepinnte Zielordner werden nicht erneut vorgeschlagen
+
+- ✅ Gestufte Bulk-Delete-Sicherheitsprüfung (none/confirm/hard_confirm)
+- ✅ Hard-Delete-Challenge-String (`DELETE <Anzahl>`) als separater Use Case für sichere Großlöschungen
+
+- ✅ Undo-Last-Action-Use-Case mit Restore-aus-Papierkorb
+
+- ✅ Album-Zielordner-Use-Case mit Namensvalidierung und Deduplizierung
+
+- ✅ Undo-Multi-Step-Use-Case (mehrere Aktionen rückgängig)
+
+- ✅ Papierkorb-Retention-Use-Case für automatisches Ausmisten alter Einträge
+- ✅ Session-Command-Log (persistiert im AppState) + Replay-Use-Case für Recovery/Debugging
 
 ## Entwicklung
 

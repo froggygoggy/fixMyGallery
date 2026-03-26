@@ -1,5 +1,7 @@
+import { CreatedAlbum } from '../../domain/models/created-album';
 import { OnboardingConfig } from '../../domain/models/onboarding-config';
 import { PinnedSlot } from '../../domain/models/pinned-slot';
+import { SessionCommandLogEntry } from '../../domain/models/session-command-log-entry';
 import { TrashEntry } from '../../domain/models/trash-entry';
 import { UndoHistoryEntry } from '../../domain/models/undo-history-entry';
 import { AppStateRepository } from '../../domain/repositories/app-state-repository';
@@ -11,6 +13,8 @@ export class InMemoryAppStateRepository implements AppStateRepository {
   private folderUsage: FolderUsage[] = [];
   private trashEntries: TrashEntry[] = [];
   private undoHistory: UndoHistoryEntry[] = [];
+  private sessionCommandLogs: SessionCommandLogEntry[] = [];
+  private createdAlbums: CreatedAlbum[] = [];
 
   async saveOnboardingConfig(config: OnboardingConfig): Promise<void> {
     this.onboardingConfig = config;
@@ -57,5 +61,26 @@ export class InMemoryAppStateRepository implements AppStateRepository {
 
   async loadUndoHistory(): Promise<UndoHistoryEntry[]> {
     return [...this.undoHistory];
+  }
+
+  async popLastUndoHistoryEntry(): Promise<UndoHistoryEntry | null> {
+    const entry = this.undoHistory.pop();
+    return entry ?? null;
+  }
+
+  async appendSessionCommandLog(entry: SessionCommandLogEntry): Promise<void> {
+    this.sessionCommandLogs.push(entry);
+  }
+
+  async loadSessionCommandLogs(): Promise<SessionCommandLogEntry[]> {
+    return [...this.sessionCommandLogs];
+  }
+
+  async saveCreatedAlbums(albums: CreatedAlbum[]): Promise<void> {
+    this.createdAlbums = [...albums];
+  }
+
+  async loadCreatedAlbums(): Promise<CreatedAlbum[]> {
+    return [...this.createdAlbums];
   }
 }

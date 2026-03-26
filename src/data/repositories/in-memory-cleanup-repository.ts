@@ -1,7 +1,7 @@
 import { Folder } from '../../domain/models/folder';
 import { MediaItem } from '../../domain/models/media-item';
 import { ReviewState } from '../../domain/models/review-state';
-import { CleanupRepository } from '../../domain/repositories/cleanup-repository';
+import { MutableCleanupRepository } from '../../domain/repositories/mutable-cleanup-repository';
 
 export interface InMemoryCleanupRepositorySeed {
   folders?: Folder[];
@@ -9,18 +9,40 @@ export interface InMemoryCleanupRepositorySeed {
   reviewStates?: ReviewState[];
 }
 
-export class InMemoryCleanupRepository implements CleanupRepository {
-  constructor(private readonly seed: InMemoryCleanupRepositorySeed = {}) {}
+export class InMemoryCleanupRepository implements MutableCleanupRepository {
+  private folders: Folder[];
+  private mediaItems: MediaItem[];
+  private reviewStates: ReviewState[];
+
+  constructor(seed: InMemoryCleanupRepositorySeed = {}) {
+    this.folders = seed.folders ?? [];
+    this.mediaItems = seed.mediaItems ?? [];
+    this.reviewStates = seed.reviewStates ?? [];
+  }
 
   async getFolders(): Promise<Folder[]> {
-    return this.seed.folders ?? [];
+    return [...this.folders];
   }
 
   async getMediaItems(): Promise<MediaItem[]> {
-    return this.seed.mediaItems ?? [];
+    return [...this.mediaItems];
   }
 
   async getReviewStates(): Promise<ReviewState[]> {
-    return this.seed.reviewStates ?? [];
+    return [...this.reviewStates];
+  }
+
+  async saveFolders(folders: Folder[]): Promise<void> {
+    this.folders = [...folders];
+  }
+
+  async saveMediaItems(mediaItems: MediaItem[]): Promise<void> {
+    this.mediaItems = [...mediaItems];
+  }
+
+  async upsertReviewStates(reviewStates: ReviewState[]): Promise<void> {
+    const byMediaId = new Map(this.reviewStates.map((item) => [item.mediaStoreId, item]));
+    reviewStates.forEach((item) => byMediaId.set(item.mediaStoreId, item));
+    this.reviewStates = [...byMediaId.values()];
   }
 }
