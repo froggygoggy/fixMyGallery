@@ -16,9 +16,41 @@ Dieses Repository enthält ein umsetzbares Domain-Fundament für Sprint 1/2:
 - Pinned-Slot-Service + Sort-Action-Planer für schnelle Swipe-Zielauflösung und Aktionsentscheidung am Bildschirmrand.
 - Session-State-Machine für Start/Selektion/Action-Apply/Pause/Resume/Goal-Reached/Complete.
 - Trash- und Undo-Planung (Delete -> Papierkorb-Einträge, Undo-Operationen) für sichere Sortieraktionen.
+- Session-Action-Orchestrator (Swipe -> Aktion -> Trash/Undo -> Session-Fortschritt) als ausführbarer Use Case.
+- Onboarding-Validator + Complete-Onboarding-Use-Case für konsistente Erstkonfiguration (Ordner, Pläne, Reminder, 30-Tage-Default).
+- App-State-Repository (Onboarding/Pinned-Slots/Folder-Usage) mit In-Memory-Implementierung für persistente Sprint-2-Flows.
+- Dashboard-Bootstrap-Use-Case für offene Alt/Neu-Aufgaben, Ordnerfortschritt und Reminder-Entscheidung.
+- Prozess-Use-Case für Session-Schritt inkl. Persistenz von Undo/Trash und Dashboard-Refresh in einem Ablauf.
+- UI-Adapter-Controller (Onboarding/Dashboard/Session) als Brücke zwischen React-Native-Screens und Domain-Use-Cases.
+- Presenter-Layer mit Fehler-Mapping und deutschen UI-Strings (i18n-ready) für screen-nahe Zustände.
 - In-Memory-Repository für schnelle Entwicklung und Tests von Domainlogik.
 - SQLite-Migrationen für Kern-Tabellen plus Onboarding-/Reminder-/Fenster-Einstellungen sowie pinned slots/folder usage.
 - Android-Permission- und MediaStore-Service-Grundgerüste.
+
+
+## Sprint-2 Status
+
+- ✅ Onboarding validieren und persistieren
+- ✅ Dashboard bootstrappen (old/new + reminder + folder progress)
+- ✅ Session-Action-Ende-zu-Ende-Orchestrierung inkl. Undo/Trash
+- ✅ UI-Adapter-Controller für Onboarding/Dashboard/Session
+- ✅ In-Memory-Persistenz für App-State, Undo-History und Trash
+- ✅ Integrativer Sprint-2-Flow-Use-Case (Onboarding -> Dashboard -> Session-Step)
+
+
+## Sprint-3 Status (in Arbeit)
+
+- ✅ Grid-Selection-Service für Multi-Select-Flows
+- ✅ Swipe-Intent-Service für konfigurierbare Löschrichtung
+- ✅ Use Case für Sortier-Präferenzen (View-Mode, Grid-Größe, Swipe-Richtung)
+- ✅ Bulk-Action-Preview-Use-Case inkl. Bestätigungslogik bei großen Löschaktionen
+- ✅ Sorting-Session-Presenter für screen-nahe Sortieransicht
+
+- ✅ Pinned-Slot-Konfiguration validieren und persistieren
+
+- ✅ Restore-Flow aus Papierkorb inkl. Undo-History-Eintrag
+
+- ✅ Zeitbasierten Session-Fortschritt als Use Case (Minuten-Gutschrift)
 
 ## Entwicklung
 
